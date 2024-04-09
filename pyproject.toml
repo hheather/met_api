@@ -8,6 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "^2.31.0"
+pillow = "^10.3.0"
+opencv-python = "^4.9.0.80"
 
 
 [build-system]

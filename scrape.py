@@ -2,12 +2,13 @@ import requests
 from pathlib import Path
 
 URL = "https://collectionapi.metmuseum.org"
-SEARCH_STR = "female statue"
+SEARCH_STR = "woman+statue"
+DOWNLOAD_DIR = 'images'
 
 def download_image(img_url):
     remove_https = img_url.replace('https://', '')
     file_name = Path(remove_https).name
-    file_path = Path(f'./assets/{file_name}')
+    file_path = Path(f'./{DOWNLOAD_DIR}/{file_name}')
     image_data = requests.get(img_url).content
     print(f'Checking if {file_path} exists...')
     if not file_path.exists():
@@ -25,7 +26,7 @@ def image_url(id):
 
 def search_objs():
     response = requests.get(f"{URL}/public/collection/v1/search", 
-                           params={'q': SEARCH_STR, 'hasImages': True})
+                           params={'q': SEARCH_STR, 'medium': 'Sculpture'})
     response_json = response.json()
     obj_ids = response_json['objectIDs']
     print(f'Found {len(obj_ids)} object IDs from API')
